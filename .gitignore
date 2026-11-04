@@ -1,0 +1,6 @@
+out/
+.DS_Store
+module/.bootcount
+module/status.txt
+module/guard.log
+__pycache__/
