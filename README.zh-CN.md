@@ -17,6 +17,33 @@
 
 目前只在这一套环境上测过。安装脚本不检查机型和系统版本，其他小米机型也可以试试。不管能不能用，都欢迎[提 issue](../../issues) 反馈，并附上机型和 ROM 版本。
 
+### 已测试
+
+- 亿连 - 无线连接 - 热点连接 连接方式
+- 智能导航流转
+- 媒体音频传输
+
+- 高德地图(17.02.2.2014，通过Google Play Store安装)
+- Spotify(9.1.98.614，CarWith标记为实验性支持APP，通过Google Play Store安装)
+- 哔哩哔哩(8.85.0，中国内地发行版本，非国际版；CarWith标记为实验性支持APP，通过Aurora Store安装)
+
+
+### 未测试
+
+- 百度地图
+- 小爱同学（测试设备未安装中国ROM特供小爱同学助理，无法调用国际ROM中的Gemini）
+- 应用商店（测试设备未安装中国ROM特供应用商店）
+- 其它CarWith APP
+- 其它被CarWith标记为实验性支持的APP
+
+- 通话音频传输
+- 其它CarWith功能
+
+
+### 已知问题
+
+- 暂无
+
 ## 原理
 
 模块从国行 ROM 补上两个文件：
@@ -80,6 +107,25 @@
 
 在 Root 管理器里移除模块，然后重启。下次开机大约 15 秒后，模块会顺带卸载 `/data/app` 里的 CarWith 副本。
 
+## 使用第三方修改版 CarWith
+
+网上有人发布修改过的 CarWith（二改版）。想用这类版本的话，可以把模块里的 `CarWith.apk` 换掉：
+
+1. 从 [Releases](../../releases) 下载模块 zip。
+2. 用 MT 管理器、ZArchiver 等能编辑压缩包的工具打开 zip，找到 `system/product/app/CarWith/CarWith.apk`。
+3. 把修改版 APK 重命名为 `CarWith.apk`，替换原来的文件，其他文件不要动。
+
+   在电脑上操作也可以：解压 zip，替换文件，然后进入解压出来的文件夹，把里面的所有文件重新打包成 zip。不要把外层文件夹也压进去，否则 Root 管理器会安装失败。
+4. 如果之前装过原版模块，先在 Root 管理器里移除模块并重启。开机约 15 秒后，旧的 CarWith 副本会自动卸载，然后再刷入改好的 zip。修改版和原版的签名不同，直接覆盖刷入可能装不上，或者继续用着旧版。
+5. 刷入后重启。
+
+注意：
+
+- 修改版的包名必须还是 `com.miui.carlink`，否则设置里的入口和模块的状态检测都找不到它。
+- 修改版一般由作者重新签名，不再是小米的平台签名，因此拿不到签名级权限，部分功能可能用不了。这类问题请先找修改版作者反馈。
+- 第三方修改版来源不明，可能夹带恶意代码，请只从信得过的地方下载。
+- 开机后模块描述显示 ❌，或者 CarWith 打不开时，点运行按钮，看日志里 `installed /data copy` 那一行的安装结果。
+
 ## 构建
 
 在 GitHub 上发布 Release 时，会触发 `.github/workflows/release.yml`。它会：
@@ -98,6 +144,24 @@ tag 格式请固定用一种，这样 `versionCode` 才会一直递增。
 手动打包时，压缩的是 `module/` 里面的内容，不是 `module` 这个文件夹本身。
 
 `tools/dexrefcheck.py` 用来检查 jar 或 APK 引用的框架方法和字段在目标 ROM 上是否存在，移植到新版本 ROM 时可以用。
+
+## 截图
+
+<img width="1200" height="2670" alt="Image" src="https://github.com/user-attachments/assets/7c8c8328-a8e4-4a2d-9b2f-d4c46c3a09d2" />
+
+<img width="1200" height="2670" alt="Image" src="https://github.com/user-attachments/assets/5e6ba6be-a0cd-4378-afaf-5c2fec41b740" />
+
+<img width="1200" height="2670" alt="Image" src="https://github.com/user-attachments/assets/0d8f731c-37aa-483c-8107-9604dbdd132f" />
+
+<img width="1024" height="592" alt="Image" src="https://github.com/user-attachments/assets/55650d15-f4e3-459a-bde6-dbd708c5a24e" />
+
+<img width="1024" height="592" alt="Image" src="https://github.com/user-attachments/assets/9ba3112c-3d21-4758-a39f-9dbbf4cc68a7" />
+
+<img width="1024" height="592" alt="Image" src="https://github.com/user-attachments/assets/943aa4da-0d34-454a-8be4-006a81aeafaa" />
+
+<img width="1024" height="592" alt="Image" src="https://github.com/user-attachments/assets/9eafe5c5-ad71-4ae7-b233-3b36804c5e0f" />
+
+<img width="1024" height="592" alt="Image" src="https://github.com/user-attachments/assets/00a46119-4c62-4705-874b-88c9dd71bee4" />
 
 ## 免责声明
 
