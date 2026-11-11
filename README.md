@@ -57,6 +57,15 @@ Most root-hiding setups (Zygisk Next, KernelSU's "umount modules by default", an
 
 ## Install
 
+> [!IMPORTANT]
+> **KernelSU users need a metamodule.** This module places its files into the system partitions through its `system/` directory. Recent KernelSU versions (with the metamodule mechanism, such as 3.x) no longer mount module `system/` directories themselves; that job is done by a metamodule such as the official meta-overlayfs. Without one, the scripts still run but neither file shows up in the system, and the module status will show ❌. Install a metamodule first, then this module. Magisk and APatch mount modules on their own and don't need one.
+>
+> To check the mount after rebooting, run this in a root shell. Both paths should be listed:
+>
+> ```sh
+> ls /product/app/CarWith/CarWith.apk /system_ext/framework/miui.car.server.jar
+> ```
+
 1. Download the latest zip from [Releases](../../releases).
 2. Flash it in KernelSU, Magisk, or APatch, then reboot.
 3. Wait about a minute after boot. The module description shows the status:

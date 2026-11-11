@@ -63,6 +63,15 @@
 
 ## 安装
 
+> [!IMPORTANT]
+> **KernelSU 用户需要先装元模块（metamodule）。** 本模块通过 `system/` 目录把文件挂载进系统分区。新版 KernelSU（引入元模块机制的版本，例如 3.x）本身不再挂载模块的 `system/` 目录，这项工作交给元模块完成，比如官方的 meta-overlayfs。没装元模块的话，脚本照样会运行，但两个文件都不会出现在系统里，模块状态会显示 ❌。请先装好元模块，再刷本模块。Magisk 和 APatch 自带挂载，不需要元模块。
+>
+> 重启后可以在 Root shell 里执行下面的命令检查挂载，两个路径都能列出来就说明成功了：
+>
+> ```sh
+> ls /product/app/CarWith/CarWith.apk /system_ext/framework/miui.car.server.jar
+> ```
+
 1. 从 [Releases](../../releases) 下载最新的 zip。
 2. 在 KernelSU、Magisk 或 APatch 中刷入，然后重启。
 3. 开机后等一分钟左右，模块描述会显示当前状态：

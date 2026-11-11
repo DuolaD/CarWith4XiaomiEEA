@@ -63,6 +63,15 @@
 
 ## 安裝
 
+> [!IMPORTANT]
+> **KernelSU 使用者需要先安裝元模組（metamodule）。** 本模組透過 `system/` 目錄把檔案掛載進系統分割區。新版 KernelSU（導入元模組機制的版本，例如 3.x）本身不再掛載模組的 `system/` 目錄，這項工作交給元模組完成，例如官方的 meta-overlayfs。沒裝元模組的話，腳本照樣會執行，但兩個檔案都不會出現在系統裡，模組狀態會顯示 ❌。請先裝好元模組，再刷入本模組。Magisk 和 APatch 內建掛載，不需要元模組。
+>
+> 重新開機後可以在 Root shell 裡執行下面的指令檢查掛載，兩個路徑都能列出來就代表成功：
+>
+> ```sh
+> ls /product/app/CarWith/CarWith.apk /system_ext/framework/miui.car.server.jar
+> ```
+
 1. 從 [Releases](../../releases) 下載最新的 zip。
 2. 在 KernelSU、Magisk 或 APatch 中刷入，然後重新開機。
 3. 開機後等一分鐘左右，模組描述會顯示目前狀態：
